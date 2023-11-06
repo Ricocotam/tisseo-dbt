@@ -3,8 +3,6 @@ with stops as (
         s.stop_id,
         s.stop_name
     from raw.stops s
-    where 
-        s.wheelchair_boarding = 2 -- 1 = inaccessible, 2 = accessible
 ),
 
 stop_times as (
@@ -27,8 +25,7 @@ trips as (
 routes as (
     select
         route_id,
-        route_short_name,
-        route_long_name
+        route_short_name
     from raw.routes
 ),
 
@@ -60,11 +57,10 @@ tst_stops as (
 correspondances as (
     select
         rt.route_short_name,
-        rt.route_long_name,
         tsts.stop_name
     from routes_trips as rt    
     left join tst_stops as tsts on rt.trip_id = tsts.trip_id
 )
 
-select * from correspondances
+select distinct route_short_name, stop_name from correspondances
 
