@@ -33,3 +33,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   tisseo:
     +materialized: view
+  horaires:
+    +materialized: view
